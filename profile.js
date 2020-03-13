@@ -6,5 +6,9 @@ const collectionName = "users";
 
 router.get("/:email",async (req,res)=>{
     await db.initialize(dbName, collectionName, function (dbCollection) {
-        dbCollection.find({}).toArray((err,array)=>res.json(array));
-    })});
+        const email = req.params.email;
+        dbCollection.find({"email":email}).toArray((err,array)=>res.json(array));
+    })
+});
+
+module.exports = router;
