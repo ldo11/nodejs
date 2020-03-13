@@ -5,6 +5,7 @@ const adminRouter = require("./routers/admin")
 const profileRouter = require("./routers/profile")
 const userRouter = require("./routers/user")
 const projectRouter = require("./routers/project")
+const executionRouter = require("./routers/execution")
 require('dotenv').config();
 const port = process.env.PORT
 require('./db/db')
@@ -17,6 +18,7 @@ app.use('/admin', adminRouter)
 app.use('/profile', profileRouter)
 app.use('/users', userRouter)
 app.use('/projects', projectRouter)
+app.use('/execution', executionRouter)
 
 app.use((err,req,res,next)=>{
     res.status(err.status ||500);
