@@ -15,7 +15,6 @@ router.post('/create', async (req, res) => {
         res.status(400).send(error)
     }
 })
-
 router.post('/login', async(req, res) => {
     //Login a registered user
     try {
