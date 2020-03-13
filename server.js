@@ -4,8 +4,8 @@ const app = express();
 const admin = require("./routers/admin")
 const profile = require("./routers/profile")
 const userRouter = require("./routers/user")
-const port = process.env.PORT
 require('dotenv').config();
+const port = process.env.PORT
 require('./db/db')
 
 
@@ -22,10 +22,8 @@ app.use((err,req,res,next)=>{
         message: err.message, error:{}
     });
 })
-<<<<<<< Updated upstream
-app.listen(3000,()=>console.log('server is running on port 3000...'));
-=======
-app.listen(3000, () => {
-    console.log(`Server running on port ${3000}`)
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`)
 });
->>>>>>> Stashed changes
+
