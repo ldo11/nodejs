@@ -23,9 +23,9 @@ app.use((err,req,res,next)=>{
     });
 })
 
-app.get("/testjwt",auth,(req,res)=>{
-    res.json("hahahaha")
-})
+// app.get("/testjwt",auth,(req,res)=>{
+//     res.json("hahahaha")
+// })
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 });
