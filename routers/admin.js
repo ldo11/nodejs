@@ -4,11 +4,7 @@ const User = require('../models/Muser')
 router.get("/alluser",async (req,res)=>{
     try {
         User.find({}, function(err, users) {
-            var userMap = {};
-            users.forEach(function(user) {
-                userMap[user._id] = user;
-            });
-            res.send(userMap);
+            res.json(users);
         })
     } catch (error) {
         res.status(400).send(error)

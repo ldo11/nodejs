@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require("cors")
 const app = express();
 const auth = require("./middleware/auth")
 const adminRouter = require("./routers/admin")
@@ -14,7 +15,7 @@ const bodyParser = require('body-parser')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
+app.use(cors())
 app.use('/admin', adminRouter);
 app.use('/profile', profileRouter);
 app.use('/users', userRouter);
