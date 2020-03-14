@@ -68,7 +68,7 @@ userSchema.methods.generateAuthToken = async function() {
 
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await Muser.findOne({ email} )
     if (!user) {
         throw new Error({ error: 'Invalid login credentials' })
     }
@@ -79,6 +79,6 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-const User = mongoose.model('User', userSchema)
+const Muser = mongoose.model('User', userSchema)
 
-module.exports = User
+module.exports = Muser
