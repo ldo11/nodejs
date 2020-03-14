@@ -14,7 +14,6 @@ router.post('/', async (req,res)=>{
     }catch (error) {
         res.status(400).send(error)
     }
-    
 });
 
 // get project by id
