@@ -34,6 +34,5 @@ const exSchema = mongoose.Schema({
         }]
     }]
 });
-const ex = mongoose.model('Ex', exSchema)
 
-module.exports = ex
+module.exports = mongoose.model('Ex', exSchema);
