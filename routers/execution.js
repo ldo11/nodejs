@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const Project = require('../models/Mproject');
+const Ex = require('../models/Mexecution');
 
 
-router.get("/allproject",async (req,res)=>{
+router.get("/allex",async (req,res)=>{
     try{
-        Project.find({} , function(err,projects){
+        Ex.find({} , function(err,projects){
             res.json(projects);
         });
     }catch(error){
@@ -12,25 +12,37 @@ router.get("/allproject",async (req,res)=>{
     }
 });
 
-router.get("/:name",async (req,res)=>{
+router.get("/:testcase",async (req,res)=>{
     try {
-        const projectName = req.params.name;
-        Project.findOne({"name":projectName}, function(err,project){
-            res.json(project);
+        const tc = req.params.testcase;
+        const projection = {'tc_name':1,'tc_ver':0,'build_number':1,'results':1};
+        Ex.find({tc_name:tc}, (err,data)=>{
+            res.json(data);
         });
+
     }catch (e) {
         res.status(400).send(e);
     }
 });
 
 router.post("/",async (req,res)=>{
-    try {
-        const project = new Project(req.body);
-        await project.save();
-        res.send('updated successfully');
+    try{
+        const oneExResult = new Ex({
+            tc_name:req.body.tc_name,
+            tester:req.body.tester,
+            tc_ver:req.body.tc_ver,
+            build_number:req.build_number,
+            results:req.results
+        });
+        oneExResult.save(function(err,data){
+            if(err) throw err;
+            res.send('update successfully');
+        })
     }catch (e) {
-        res.status(400).send(e);
+        res.send(400).send(e);
     }
 });
+
+
 
 module.exports=router;
