@@ -15,7 +15,6 @@ router.get("/allex",async (req,res)=>{
 router.get("/:testcase",async (req,res)=>{
     try {
         const tc = req.params.testcase;
-        const projection = {'tc_name':1,'tc_ver':0,'build_number':1,'results':1};
         Ex.find({tc_name:tc}, (err,data)=>{
             res.json(data);
         });
@@ -34,7 +33,7 @@ router.post("/",async (req,res)=>{
             build_number:req.build_number,
             results:req.results
         });
-        oneExResult.save(function(err,data){
+        await oneExResult.save(function(err,data){
             if(err) throw err;
             res.send('update successfully');
         })
