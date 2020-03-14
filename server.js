@@ -2,10 +2,10 @@ const express = require("express")
 const app = express();
 const auth = require("./middleware/auth")
 const adminRouter = require("./routers/admin")
-//const profileRouter = require("./routers/profile")
+const profileRouter = require("./routers/profile")
 const userRouter = require("./routers/user")
 const projectRouter = require("./routers/project")
-//const executionRouter = require("./routers/execution")
+const executionRouter = require("./routers/execution")
 require('dotenv').config();
 const port = process.env.PORT
 require('./db/db')
@@ -14,11 +14,11 @@ const bodyParser = require('body-parser')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/admin', adminRouter)
-//app.use('/profile', profileRouter)
-app.use('/users', userRouter)
+app.use('/admin', adminRouter);
+app.use('/profile', profileRouter);
+app.use('/users', userRouter);
 app.use('/projects', projectRouter)
-//app.use('/execution', executionRouter)
+app.use('/execution', executionRouter);
 
 app.use((err,req,res,next)=>{
     res.status(err.status ||500);
