@@ -10,7 +10,12 @@ const tcSchema = mongoose.Schema({
         type: String,
         lowercase: true
     },
+    tc_version:{
+        type: String,
+        lowercase: true
+    },
     steps: [{
+        step_id: mongoose.Types.ObjectId,
         action: {
             type: String,
             trim: true
