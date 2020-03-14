@@ -1,16 +1,26 @@
 const router = require('express').Router();
 const Project = require('../models/Mproject');
-const collectionName = "projects";
 
-Project.get("/allproject",async (req,res)=>{
+
+router.get("/allproject",async (req,res)=>{
     try{
         Project.find({} , function(err,projects){
-            console.log(projects);
-            res.join(projects);
+            res.json(projects);
         });
     }catch(error){
         res.status(400).send(error);
     }
 });
+
+router.get("/:name",async (req,res)=>{
+    try {
+        const projectName = req.params.name;
+        Project.findOne({"name":projectName}, function(err,project){
+            res.json(project);
+        });
+    }catch (e) {
+        res.status(400).send(e);
+    }
+})
 
 module.exports=router;
