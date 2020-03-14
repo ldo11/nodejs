@@ -9,9 +9,9 @@ const projectSchema = mongoose.Schema({
     testers:[{type: String,
         trim: true}],
     TCes: [{
+        tc_id: mongoose.Types.ObjectId(),
         tc_name:{
             type: String,
-            unique: true,
             lowercase: true,
         },
         steps:[{
@@ -38,6 +38,7 @@ const projectSchema = mongoose.Schema({
         }
     }],
     executions:[{
+        ex_id:mongoose.Types.ObjectId(),
         tcname:{
             type: String,
             trim: true
