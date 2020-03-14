@@ -12,10 +12,21 @@ router.get("/allex",async (req,res)=>{
     }
 });
 
+router.get("/:id",async (req,res)=>{
+    try {
+        Ex.findById(req.params.id,(err,data)=>{
+            res.json(data);
+        });
+
+    }catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 router.get("/:testcase",async (req,res)=>{
     try {
-        const tc = req.params.testcase;
-        Ex.find({tc_name:tc}, (err,data)=>{
+        const tcName = req.params.testcase;
+        Ex.find({tc_name:tcName}, (err,data)=>{
             res.json(data);
         });
 
@@ -35,7 +46,7 @@ router.post("/",async (req,res)=>{
         });
         await oneExResult.save(function(err,data){
             if(err) throw err;
-            res.send('update successfully');
+            res.send('update successfully' , oneExResult.id);
         })
     }catch (e) {
         res.send(400).send(e);
