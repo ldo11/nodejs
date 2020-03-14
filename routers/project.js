@@ -17,9 +17,9 @@ router.post('/', async (req,res)=>{
 });
 
 // get project by id
-router.get("/projectbyid",async (req,res)=>{
+router.get("/projectbyid/:id",async (req,res)=>{
     try{
-        await MProject.find({_id:req.body.id},(error,project)=>{
+        await MProject.find({_id:req.params.id},(error,project)=>{
             res.json({project})
         });
     }catch (error) {
@@ -29,10 +29,10 @@ router.get("/projectbyid",async (req,res)=>{
 
 //add tester to project
 
-router.post('/addtester', async (req,res)=>{
+router.post('/addtester/:projectname', async (req,res)=>{
     try{
         const tester=req.body.testeremail;
-        await MProject.update({name:req.body.name}, {$push:{"testers":tester}})
+        await MProject.update({name:req.params.projectname}, {$push:{"testers":tester}})
         res.json("{Tester  added  to the project }")
     }catch (error) {
         res.status(400).send(error)
@@ -43,17 +43,15 @@ router.post('/addtester', async (req,res)=>{
 
 //find all about project:all testers to be refined
 
-router.get("/alltesters",async (req,res)=>{
+router.get("/alltesters/:projectname",async (req,res)=>{
     try{
-        await MProject.find({name:req.body.name},(error,project)=>{
+        await MProject.find({name:req.params.projectname},(error,project)=>{
             res.json({project})
         });
     }catch (error) {
         res.status(400).send(error)
     }
 });
-
-
 
 
 module.exports=router;
