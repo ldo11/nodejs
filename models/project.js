@@ -46,6 +46,10 @@ const projectSchema = mongoose.Schema({
             type: String,
             trim: true
         },
+        tc_ver:{
+            type: String,
+            trim: true
+        },
         build_number:{
             type: String,
             trim: true
