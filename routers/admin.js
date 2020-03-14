@@ -15,19 +15,18 @@ router.get("/alluser",async (req,res)=>{
     }
 });
 
-router.post('/activate', async (req,res)=>{
+router.post('/activate/:email', async (req,res)=>{
     try{
-        await User.updateOne({email:req.body.email},{status:'active'});
+        await User.updateOne({email:req.params.email},{status:'active'});
         res.json("Activate successful!");
     }catch (error) {
         res.status(400).send(error)
     }
 });
 
-
-router.post('/deactivate', async (req,res)=>{
+router.post('/deactivate/:email', async (req,res)=>{
     try{
-        await User.updateOne({email:req.body.email},{status:'inactive'});
+        await User.updateOne({email:req.params.email},{status:'inactive'});
         res.json("Deactivate successful!");
     }catch (error) {
         res.status(400).send(error)
@@ -36,9 +35,9 @@ router.post('/deactivate', async (req,res)=>{
 });
 
 
-router.post('/role', async (req,res)=>{
+router.post('/role/:email', async (req,res)=>{
     try{
-        await User.updateOne({email:req.body.email},{role:req.body.role});
+        await User.updateOne({email:req.params.email},{role:req.body.role});
         res.json("Change role successful!");
     }catch (error) {
         res.status(400).send(error)
