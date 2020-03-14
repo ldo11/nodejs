@@ -21,6 +21,16 @@ router.get("/:name",async (req,res)=>{
     }catch (e) {
         res.status(400).send(e);
     }
-})
+});
+
+router.post("/",async (req,res)=>{
+    try {
+        const project = new Project(req.body);
+        await project.save();
+        res.send('updated successfully');
+    }catch (e) {
+        res.status(400).send(e);
+    }
+});
 
 module.exports=router;
