@@ -1,6 +1,5 @@
-const router = require('express').Router()
-const db = require("../dbconfig");
-const dbName = "mwa"; //homework07.lectures
+const router = require('express').Router();
+const Project = require('../models/Mproject');
 const collectionName = "projects";
 
 
