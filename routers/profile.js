@@ -1,29 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../dbconfig");
-const dbName = "mwa";
-const collectionName = "users";
-
+const User = require('../models/User')
 router.get("/:email",async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-        const email = req.params.email;
-        dbCollection.find({"email":email}).toArray((err,array)=>res.json(array));
-    })
+    try{
+        await User.findOne({email:req.body.email},(error,user)=>{
+            res.json({user})
+        });
+    }catch (error) {
+        res.status(400).send(error)
+    }
 });
 
 router.post("/",async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-        const name = req.body.name;
-        const email = req.body.email;
-        const password = req.body.password;
-        const avatar = req.body.avatar;
-        const phone = req.body.phone;
-        const role = req.body.role;
-        const status = req.body.status;
-
-        dbCollection.insertOne({"email":email, "name":name,"password":password, "avatar":avatar,"phone":phone,"role":role,"status":status});
-        res.json('inserted...');
-    })
+    try{
+        await User.findOneAndUpdate({email:req.body.email},{name:req.body.name, phone:req.body.phone, avatar:req.body.avatar});
+        res.json("Profile update successful");
+    }catch (error) {
+        res.status(400).send(error)
+    }
 });
 
 
