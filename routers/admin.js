@@ -22,39 +22,27 @@ router.post('/activate', async (req,res)=>{
     }catch (error) {
         res.status(400).send(error)
     }
-
-    // await db.initialize(dbName, collectionName, function (dbCollection) {
-    //     dbCollection.updateOne({email:req.body.email},
-    //         {
-    //  $set:{status:'active'}
-    //     });
-    //     res.json("{activate_sucess}")
-    // })
-    //
 });
 
 
 router.post('/deactivate', async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-        dbCollection.updateOne({email:req.body.email},
-            {
-     $set:{status:'deactive'}
-        });
-        res.json("{DEactivate_sucess}")
-    })
+    try{
+        await User.updateOne({email:req.body.email},{status:'inactive'});
+        res.json("Deactivate successful!");
+    }catch (error) {
+        res.status(400).send(error)
+    }
 
 });
 
 
 router.post('/role', async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-        dbCollection.updateOne({email:req.body.email},
-            {
-     $set:{role:req.body.role}
-        });
-        res.json("{ROLE_CHANGE_sucess}")
-    })
-    
+    try{
+        await User.updateOne({email:req.body.email},{role:req.body.role});
+        res.json("Change role successful!");
+    }catch (error) {
+        res.status(400).send(error)
+    }
 });
 module.exports=router;
 
