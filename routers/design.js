@@ -10,7 +10,7 @@ router.get("/p/:projectname",async (req,res)=>{
         res.status(400).send(error)
     }
 
-})ß
+})
 router.get("/n/:name",async (req,res)=>{
     try {
         await tc.find({name:req.params.name}).exec((error, tc)=>{
