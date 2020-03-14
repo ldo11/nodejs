@@ -1,22 +1,36 @@
 const router = require('express').Router()
-const db = require("../dbconfig");
-const dbName = "mwa"; //homework07.lectures
-const collectionName = "users";
+const User = require('../models/User')
 
 router.get("/alluser",async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-    dbCollection.find({}).toArray((err,array)=>res.json(array));
-})});
+    try {
+        User.find({}, function(err, users) {
+            var userMap = {};
+            users.forEach(function(user) {
+                userMap[user._id] = user;
+            });
+            res.send(userMap);
+        })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+});
 
 router.post('/activate', async (req,res)=>{
-    await db.initialize(dbName, collectionName, function (dbCollection) {
-        dbCollection.updateOne({email:req.body.email},
-            {
-     $set:{status:'active'}
-        });
-        res.json("{activate_sucess}")
-    })
-    
+    try{
+        await User.updateOne({email:req.body.email},{status:'active'});
+        res.json("Activate successful!");
+    }catch (error) {
+        res.status(400).send(error)
+    }
+
+    // await db.initialize(dbName, collectionName, function (dbCollection) {
+    //     dbCollection.updateOne({email:req.body.email},
+    //         {
+    //  $set:{status:'active'}
+    //     });
+    //     res.json("{activate_sucess}")
+    // })
+    //
 });
 
 
@@ -28,7 +42,7 @@ router.post('/deactivate', async (req,res)=>{
         });
         res.json("{DEactivate_sucess}")
     })
-    
+
 });
 
 
