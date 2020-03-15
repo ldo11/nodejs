@@ -4,7 +4,7 @@ const User = require('../models/Muser');
 router.get("/:email",async (req,res)=>{
     try{
         await User.findOne({email:req.params.email},(error,user)=>{
-            res.json({user});
+            res.json(user);
         });
     }catch (error) {
         res.status(400).send(error);
