@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/Muser');
 router.get("/:email",async (req,res)=>{
     try{
-        await User.findOne({email:req.body.email},(error,user)=>{
+        await User.findOne({email:req.params.email},(error,user)=>{
             res.json({user});
         });
     }catch (error) {
