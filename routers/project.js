@@ -50,6 +50,17 @@ router.get("/projectbyid/:id",async (req,res)=>{
     }
 });
 
+//find project by name
+router.get("/:projectName" , async (req,res)=>{
+    try{
+        await MProject.find({name:req.params.projectName}, (err,project)=>{
+            res.json(project);
+        })
+    }catch{
+        res.status(400).send(error);
+    }
+});
+
 //add tester to project
 
 router.post('/addtester/:projectname', async (req,res)=>{
