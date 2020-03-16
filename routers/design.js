@@ -33,8 +33,8 @@ router.post("/",async (req,res)=>{
 })
 router.delete("/:id",async (req,res)=>{
     try {
-        tc.findByIdAndRemove(req.params.id);
-        res.json("deleted");
+        tc.findByIdAndRemove(req.params.id).exec(function(err, result){res.json(result)});
+
     } catch (error) {
         res.status(400).send(error)
     }

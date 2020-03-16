@@ -30,4 +30,16 @@ router.post('/login', async(req, res) => {
 
 })
 
+router.get('/alluser', async (req, res) => {
+    // Create a new user
+    try {
+        User.find({}).exec((error,email)=>{
+            const result = email.map((x)=>{return {'email':x.email}});
+            res.json(result);
+        })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router
