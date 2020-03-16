@@ -28,6 +28,17 @@ router.get('/allprojects',async (req,res)=>{
 });
 
 
+// get project by tester
+router.get("/e/:email",async (req,res)=>{
+    try{
+        await MProject.find({testers:req.params.email},(error,project)=>{
+            res.json(project)
+        });
+    }catch (error) {
+        res.status(400).send(error)
+    }
+});
+
 // get project by id
 router.get("/projectbyid/:id",async (req,res)=>{
     try{

@@ -31,6 +31,15 @@ router.post("/",async (req,res)=>{
     }
 
 })
+router.delete("/:id",async (req,res)=>{
+    try {
+        tc.findByIdAndRemove(req.params.id);
+        res.json("deleted");
+    } catch (error) {
+        res.status(400).send(error)
+    }
+
+})
 router.post("/update/:name",async (req,res)=>{
     try {
         await tc.update({name:req.params.name},{
