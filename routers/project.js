@@ -54,7 +54,7 @@ router.get("/projectbyid/:id",async (req,res)=>{
 router.get("/:projectName" , async (req,res)=>{
     try{
         await MProject.find({name:req.params.projectName}, (err,project)=>{
-            res.json(project);
+            res.json({project});
         })
     }catch{
         res.status(400).send(error);
