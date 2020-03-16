@@ -6,7 +6,7 @@ const collectionName = "projects";
 
 
 
-        //to insert project with project name in body
+//to insert project with project name in body
 router.post('/', async (req,res)=>{
     try{
         await MProject.create({name:req.body.name})
@@ -15,6 +15,18 @@ router.post('/', async (req,res)=>{
         res.status(400).send(error)
     }
 });
+
+//to get all projects
+router.get('/allprojects',async (req,res)=>{
+    try{
+        await MProject.find({}, (error,projects) =>{
+           res.json(projects);
+        });
+    }catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 
 // get project by id
 router.get("/projectbyid/:id",async (req,res)=>{
