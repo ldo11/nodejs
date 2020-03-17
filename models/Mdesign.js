@@ -27,9 +27,9 @@ const tcSchema = mongoose.Schema({
         }
     }],
     status: {
-        type: String,
+        type: Number,
         trim: true,
-        default: 'New'
+        default: '1'
     },
     creator: {
         type: String,

@@ -33,14 +33,14 @@ const userSchema = mongoose.Schema({
         trim: true
     },
     role: {
-        type: String,
+        type: Number,
         trim: true,
-        default: 'tester'
+        default: '1'
     },
     status: {
-        type: String,
+        type: Number,
         trim: true,
-        default: 'active'
+        default: '1'
     },
     tokens: [{
         token: {

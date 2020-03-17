@@ -13,7 +13,8 @@ router.get("/:email",async (req,res)=>{
 
 router.post("/",async (req,res)=>{
     try{
-        await User.findOneAndUpdate({email:req.body.email},{name:req.body.name, phone:req.body.phone, avatar:req.body.avatar});
+        await User.findOneAndUpdate({email:req.body.email},
+            {name:req.body.name, phone:req.body.phone, avatar:req.body.avatar});
         res.json("Profile update successfully");
     }catch (error) {
         res.status(400).send(error);

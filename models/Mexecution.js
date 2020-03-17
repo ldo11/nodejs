@@ -18,7 +18,6 @@ const exSchema = mongoose.Schema({
         trim: true
     },
     results:[{
-        _id:mongoose.Types.ObjectId,
         step_id: String,
         result:{
             type: String,

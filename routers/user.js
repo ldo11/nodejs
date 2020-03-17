@@ -9,7 +9,7 @@ router.post('/create', async (req, res) => {
         const user = new User(req.body)
         await user.save()
         const token = await user.generateAuthToken()
-        res.status(201).send({ user, token })
+        res.json("Account Created")
     } catch (error) {
         res.status(400).send(error)
     }
@@ -23,7 +23,12 @@ router.post('/login', async(req, res) => {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
         }
         const token = await user.generateAuthToken()
-        res.send({ user, token })
+
+        const result = {status: true
+            ,"data": {"id": user._id, "token": token, "user":user, "role":user.role}
+        }
+
+        res.json(result)
     } catch (error) {
         res.status(400).send(error)
     }
