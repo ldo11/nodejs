@@ -34,11 +34,13 @@ const userSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        trim: true
+        trim: true,
+        default: 'tester'
     },
     status: {
         type: String,
-        trim: true
+        trim: true,
+        default: 'active'
     },
     tokens: [{
         token: {

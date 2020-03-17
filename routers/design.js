@@ -31,10 +31,11 @@ router.post("/",async (req,res)=>{
     }
 
 })
-router.delete("/:id",async (req,res)=>{
+router.delete("/:tcid/:id",async (req,res)=>{
     try {
-        tc.findByIdAndRemove(req.params.id).exec(function(err, result){res.json(result)});
-
+        // tc.steps.pull({step_id:req.params.id})
+        tc.findByIdAndUpdate(req.params.tcid,{"$pull":{"steps": {"_id":req.params.id}}})
+            .exec(function(err, result){res.json(result)});
     } catch (error) {
         res.status(400).send(error)
     }

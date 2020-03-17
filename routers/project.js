@@ -19,7 +19,7 @@ router.post('/', async (req,res)=>{
 //to get all projects
 router.get('/allprojects',async (req,res)=>{
     try{
-        await MProject.find({}, (error,projects) =>{
+        await MProject.find({}).sort({_id:-1}).exec((error,projects) =>{
            res.json(projects);
         });
     }catch (e) {
@@ -66,8 +66,13 @@ router.get("/:projectName" , async (req,res)=>{
 router.post('/addtester/:projectname', async (req,res)=>{
     try{
         const tester=req.body.testeremail;
-        await MProject.update({name:req.params.projectname}, {$push:{"testers":tester}})
-        res.json("{Tester  added  to the project }")
+        console.log(tester);
+        await MProject.updateOne({name:req.params.projectname}, {$addToSet:{"testers":req.body.testeremail}},{ "upsert": true })
+            .exec((error,result)=>{
+                if(error) res.json(error)
+                res.json(result)
+            });
+
     }catch (error) {
         res.status(400).send(error)
     }

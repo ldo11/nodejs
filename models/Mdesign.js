@@ -11,8 +11,9 @@ const tcSchema = mongoose.Schema({
         lowercase: true
     },
     tc_version:{
-        type: String,
-        lowercase: true
+        type: Number,
+        lowercase: true,
+        default: '1.0'
     },
     steps: [{
         step_id: mongoose.Types.ObjectId,
@@ -27,7 +28,8 @@ const tcSchema = mongoose.Schema({
     }],
     status: {
         type: String,
-        trim: true
+        trim: true,
+        default: 'New'
     },
     creator: {
         type: String,

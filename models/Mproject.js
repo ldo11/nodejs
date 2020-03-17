@@ -6,8 +6,7 @@ const projectSchema = mongoose.Schema({
         unique: true,
         trim: true
     },
-    testers:[{type: String,
-        trim: true}]
+    testers: [String],
 });
 const project = mongoose.model('Project', projectSchema)
 
