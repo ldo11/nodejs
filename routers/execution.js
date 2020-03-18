@@ -52,6 +52,33 @@ router.post("/",async (req,res)=>{
         res.send(400).send(e);
     }
 });
+router.post("/upsertStep",async (req, res) => {
+    const results = {
+        step_id: req.body.step_id,
+        result: req.body.result,
+        comment:req.body.comment};
+    try{
+       Ex.findOne({_id:req.body.id},function (err, execution) {
+           let found = 0;
+            execution.results.map((todo, i) => {
+                if (todo.step_id == results.step_id){
+                    found = 1;
+                    execution.results[i] = results;
+                }
+            });
+
+            if(found==0){
+                execution.results.push(results);
+            }
+            execution.save();
+           res.json(execution);
+       })
+
+
+    }catch (e) {
+        res.send(400).send(e);
+    }
+})
 
 
 
