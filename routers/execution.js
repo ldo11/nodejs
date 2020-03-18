@@ -46,7 +46,10 @@ router.post("/",async (req,res)=>{
         });
         await oneExResult.save(function(err,data){
             if(err) throw err;
-            res.json(data._id);
+            const result = {status: true
+                ,"data": {"id":data._id}
+            }
+            res.json(result)
         })
     }catch (e) {
         res.send(400).send(e);

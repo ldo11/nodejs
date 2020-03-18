@@ -29,11 +29,17 @@ router.get('/allprojects',async (req,res)=>{
 
 
 // get project by tester
-router.get("/e/:email",async (req,res)=>{
+router.get("/e/:email/:role",async (req,res)=>{
     try{
-        await MProject.find({testers:req.params.email},(error,project)=>{
-            res.json(project)
-        });
+        if(req.params.role === '2'){
+            await MProject.find({},(error,project)=>{
+                res.json(project)
+            });
+        }else{
+            await MProject.find({testers:req.params.email},(error,project)=>{
+                res.json(project)
+            });
+        }
     }catch (error) {
         res.status(400).send(error)
     }

@@ -23,9 +23,15 @@ router.get("/n/:name",async (req,res)=>{
 })
 router.post("/",async (req,res)=>{
     try {
+        let result;
         const testcase = new tc(req.body)
-        await testcase.save();
-        res.json("Test case created")
+        await testcase.save((error)=>{
+            if(error)
+                result = {status: false, "data":{"error": error}};
+            else
+                result = {status: true,"data": {"name": testcase.name}};
+            res.json(result);
+        });
     } catch (error) {
         res.status(400).send(error)
     }
@@ -47,9 +53,12 @@ router.post("/update/:name",async (req,res)=>{
             name:req.body.name,
             tc_version:req.body.tc_version,
             status:req.body.status,
+            designer:req.body.designer,
             reviewer:req.body.reviewer
+        }).exec((error)=>{
+            if(error) res.json(error);
+            res.json('Updated')
         });
-        res.json("Updated");
     } catch (error) {
         res.status(400).send(error)
     }

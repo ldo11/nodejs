@@ -25,7 +25,7 @@ router.post('/login', async(req, res) => {
         const token = await user.generateAuthToken()
 
         const result = {status: true
-            ,"data": {"id": user._id, "token": token, "user":user, "role":user.role}
+            ,"data": {"id": user._id, "token": token, "user":user, "role":user.role, "email":user.email}
         }
 
         res.json(result)
