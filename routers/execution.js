@@ -46,7 +46,7 @@ router.post("/",async (req,res)=>{
         });
         await oneExResult.save(function(err,data){
             if(err) throw err;
-            res.send('update successfully' , oneExResult.id);
+            res.json(data._id);
         })
     }catch (e) {
         res.send(400).send(e);
