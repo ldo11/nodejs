@@ -21,6 +21,13 @@ router.post('/login', async(req, res) => {
         const user = await User.findByCredentials(email, password)
         if (!user) {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
+        } else {
+            User.findOne({email: email},{status: 1}).exec((error,data)=>{
+                console.log();
+                if (data.status === 2){
+                    return res.status(401).send({error: 'Login failed! User is inactive'})
+                }
+            })
         }
         const token = await user.generateAuthToken()
 
