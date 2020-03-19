@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 const tcSchema = mongoose.Schema({
     name: {
         type: String,
+        required:true,
         unique:true,
         lowercase: true
     },
     project_name:{
         type: String,
+        required:true,
         lowercase: true
     },
     tc_version:{
@@ -33,15 +35,18 @@ const tcSchema = mongoose.Schema({
     },
     creator: {
         type: String,
-        trim: true
+        trim: true,
+        default: ' '
     },
     designer: {
         type: String,
-        trim: true
+        trim: true,
+        default: ' '
     },
     reviewer: {
         type: String,
-        trim: true
+        trim: true,
+        default: ' '
     }
 });
 const tc = mongoose.model('Tc', tcSchema)

@@ -41,10 +41,23 @@ router.post("/",async (req,res)=>{
             tc_name:req.body.tc_name,
             tester:req.body.tester,
             tc_ver:req.body.tc_ver,
-            build_number:req.build_number,
-            results:req.results
+            build_number:req.body.build_number,
+            start:req.body.start
         });
         await oneExResult.save(function(err,data){
+            if(err) throw err;
+            const result = {status: true
+                ,"data": oneExResult
+            }
+            res.json(result)
+        })
+    }catch (e) {
+        res.send(400).send(e);
+    }
+});
+router.post("/end",async (req,res)=>{
+    try{
+        Ex.findOneAndUpdate({_id:req.body.id},{end:req.body.end}).exec(function(err,data){
             if(err) throw err;
             const result = {status: true
                 ,"data": {"id":data._id}

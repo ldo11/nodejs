@@ -13,6 +13,14 @@ const exSchema = mongoose.Schema({
         type: String,
         trim: true
     },
+    start:{
+        type: Date,
+        trim: true
+    },
+    end:{
+        type: Date,
+        trim: true
+    },
     build_number:{
         type: String,
         trim: true

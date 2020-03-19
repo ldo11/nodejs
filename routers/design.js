@@ -13,7 +13,7 @@ router.get("/p/:projectname",async (req,res)=>{
 })
 router.get("/n/:name",async (req,res)=>{
     try {
-        await tc.find({name:req.params.name}).exec((error, tc)=>{
+        await tc.findOne({name:req.params.name}).exec((error, tc)=>{
             res.json(tc);
         });
     } catch (error) {
