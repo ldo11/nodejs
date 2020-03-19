@@ -13,7 +13,7 @@ router.get("/alluser",async (req,res)=>{
 
 router.post('/activate/:email', async (req,res)=>{
     try{
-        await User.updateOne({email:req.params.email},{status:'active'});
+        await User.updateOne({email:req.params.email},{status:1});
         res.json("Activate successful!");
     }catch (error) {
         res.status(400).send(error)
@@ -22,7 +22,7 @@ router.post('/activate/:email', async (req,res)=>{
 
 router.post('/deactivate/:email', async (req,res)=>{
     try{
-        await User.updateOne({email:req.params.email},{status:'inactive'});
+        await User.updateOne({email:req.params.email},{status:2});
         res.json("Deactivate successful!");
     }catch (error) {
         res.status(400).send(error)

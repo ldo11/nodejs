@@ -16,12 +16,12 @@ const bodyParser = require('body-parser')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use('/admin', adminRouter);
-app.use('/profile', profileRouter);
+app.use('/admin', auth, adminRouter);
+app.use('/profile', auth, profileRouter);
 app.use('/users', userRouter);
-app.use('/projects', projectRouter)
-app.use('/execution', executionRouter);
-app.use('/design', designRouter);
+app.use('/projects', auth, projectRouter)
+app.use('/execution', auth, executionRouter);
+app.use('/design', auth, designRouter);
 
 
 app.use((err,req,res,next)=>{
